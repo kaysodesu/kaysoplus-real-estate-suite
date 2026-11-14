@@ -1,0 +1,8 @@
+{
+  "name": "KaysoPlus Real Estate Suite",
+  "description": "One real estate workspace: prospect screening, room-split property inventory, leases, rent ledger and calendar, maintenance and vendors, virtual tours, co-living policies, and an AI listing studio with PDF flyers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
