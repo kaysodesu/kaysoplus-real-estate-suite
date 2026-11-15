@@ -4,6 +4,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: process.env.PAGES_BASE || '/', // set for the GitHub Pages demo build
   plugins: [react(), tailwindcss()],
   resolve: { alias: { '@': path.resolve(__dirname, '.') } },
 });

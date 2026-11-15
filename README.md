@@ -3,6 +3,8 @@
 One real estate workspace built by blending four Google AI Studio prototypes into a single app with no duplicated features.
 Beta · Developed by Cason Point Network. **Use made-up information only.**
 
+**Live demo:** https://kaysodesu.github.io/kaysoplus-real-estate-suite/. Runs entirely in your browser with sample data, and anything you add is saved only on your device. The AI listing writer uses built-in templates on the demo; run it locally with a Gemini key for live AI copy. To update the demo: `npm run build:pages`, then publish the `dist-pages` folder to the `gh-pages` branch.
+
 ## Sections
 
 | Section | What it does | Came from |

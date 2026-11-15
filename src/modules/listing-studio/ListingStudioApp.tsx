@@ -204,6 +204,24 @@ export default function App() {
     }
   };
 
+  // Local refine used when the AI server or key isn't available
+  const applyLocalRefine = (action: string) => {
+        // Fallback local transformations if API key is not connected yet
+        if (action === 'make_punchier') {
+          const refined = outputText
+            .replace(/Introducing a masterfully tailored living experience/gi, 'Direct listing spotlight')
+            .replace(/Exceptional opportunity to capture/gi, 'Prime acquisition target at');
+          setOutputText(refined);
+        } else if (action === 'add_hashtags') {
+          const tags = `\n\n#RealEstate #LuxuryHomes #PropertyListing #${currentClient.name.replace(/\s+/g, '')} #DreamHome #JustListed #ExclusiveProperty`;
+          setOutputText(outputText + tags);
+        } else if (action === 'shorten_bullet_points') {
+          const lines = outputText.split('\n').filter(Boolean);
+          const bullets = lines.map((l) => (l.startsWith('•') || l.startsWith('📌') ? l : `• ${l}`)).join('\n');
+          setOutputText(bullets);
+        }
+  };
+
   // Quick Refine with AI
   const handleRefineCopy = async (action: string) => {
     if (!outputText) return;
@@ -222,23 +240,12 @@ export default function App() {
       if (data.success && data.copy) {
         setOutputText(data.copy);
       } else {
-        // Fallback local transformations if API key is not connected yet
-        if (action === 'make_punchier') {
-          const refined = outputText
-            .replace(/Introducing a masterfully tailored living experience/gi, 'Direct listing spotlight')
-            .replace(/Exceptional opportunity to capture/gi, 'Prime acquisition target at');
-          setOutputText(refined);
-        } else if (action === 'add_hashtags') {
-          const tags = `\n\n#RealEstate #LuxuryHomes #PropertyListing #${currentClient.name.replace(/\s+/g, '')} #DreamHome #JustListed #ExclusiveProperty`;
-          setOutputText(outputText + tags);
-        } else if (action === 'shorten_bullet_points') {
-          const lines = outputText.split('\n').filter(Boolean);
-          const bullets = lines.map((l) => (l.startsWith('•') || l.startsWith('📌') ? l : `• ${l}`)).join('\n');
-          setOutputText(bullets);
-        }
+        applyLocalRefine(action);
       }
     } catch (err) {
-      console.warn('Refinement error:', err);
+      // No server (e.g. the static demo site): refine locally instead
+      console.warn('Refinement error, applying local refine:', err);
+      applyLocalRefine(action);
     } finally {
       setIsRefining(false);
     }
