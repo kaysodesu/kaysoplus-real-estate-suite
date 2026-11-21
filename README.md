@@ -42,3 +42,6 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 Production: `npm run build` then `npm start`. Optional `.env`: `GEMINI_API_KEY` for real AI copy (without it, Listing Studio uses built-in templates).
+
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T5N72AQZSL)
